@@ -44,6 +44,19 @@ class App extends React.Component {
     })
   }
 
+  deleteCompleted = event => {
+    event.preventDefault()
+
+    this.setState({
+      // filter out all groceries that are purchased
+      data: this.state.data.filter(item => {
+        // this is the same as:
+        // item.purchased === false
+        return !item.completed
+      })
+    })
+  }
+
     
 
   render() {
@@ -53,6 +66,9 @@ class App extends React.Component {
           <h1>To-Do-List</h1>
         </div>
         <TodoList toggleItem={this.toggleItem} data={this.state.data}/>
+        <button className="clear-btn" onClick={this.deleteCompleted}>
+            Delete Completed
+        </button>
       </div>
     );
   }
